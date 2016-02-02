@@ -5,12 +5,14 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 
 import com.firebase.client.ChildEventListener;
 import com.firebase.client.DataSnapshot;
@@ -18,14 +20,19 @@ import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
 
 public class MainActivity extends AppCompatActivity {
-
-    private final String TAG = "Main Activity";
     EditText todo_text;
+    ProgressBar progressBar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        Toolbar mToolBar = (Toolbar) findViewById(R.id.toolbar);
+        assert mToolBar != null;
+        mToolBar.setTitle(R.string.app_name);
+        setSupportActionBar(mToolBar);
+
+        progressBar = (ProgressBar) findViewById(R.id.progressBar);
         // Get ListView object from xml
         final ListView listView = (ListView) findViewById(R.id.listView);
         // Create a new Adapter
@@ -42,6 +49,7 @@ public class MainActivity extends AppCompatActivity {
                 .addChildEventListener(new ChildEventListener() {
                     public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                         adapter.add((String) dataSnapshot.child("text").getValue());
+                        progressBar.setVisibility(View.GONE);
                     }
 
                     public void onChildRemoved(DataSnapshot dataSnapshot) {

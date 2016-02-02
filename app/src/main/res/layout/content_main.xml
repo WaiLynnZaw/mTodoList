@@ -15,4 +15,11 @@
         android:layout_height="match_parent"
         android:layout_marginBottom="50dp">
     </ListView>
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="?android:progressBarStyle"
+        android:layout_gravity="center"
+        />
 </FrameLayout>
