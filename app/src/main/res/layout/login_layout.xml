@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimary">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/app_name"
+        android:textColor="@color/white"
+        android:gravity="center"
+        android:layout_marginTop="48dp"
+        android:textSize="36sp"/>
+    <LinearLayout
+        android:layout_gravity="center_vertical"
+        android:orientation="vertical" android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/activity_vertical_margin">
+        <EditText
+            android:id="@+id/login_email"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:hint="@string/label_email"
+            android:textColorHint="@color/divider"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
+            android:inputType="textEmailAddress"
+            android:theme="@style/EditTextTheme" />
+        <EditText
+            android:id="@+id/login_password"
+            android:layout_marginTop="8dp"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:hint="@string/label_password"
+            android:textColorHint="@color/divider"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
+            android:inputType="textPassword"
+            android:theme="@style/EditTextTheme" />
+        <Button
+            android:id="@+id/login_button"
+            android:layout_marginTop="16dp"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:text="@string/label_login"
+            android:textColor="@color/white"
+            android:background="@color/colorAccent"/>
+        <LinearLayout
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/white"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="1"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="OR"
+                android:textColor="@color/white"
+                android:gravity="center"
+                android:layout_weight="1"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/white"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="1"/>
+        </LinearLayout>
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Log in with Facebook"/>
+    </LinearLayout>
+</FrameLayout>
