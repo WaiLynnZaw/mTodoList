@@ -9,6 +9,7 @@ import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -18,6 +19,7 @@ import com.firebase.client.ChildEventListener;
 import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
+import com.firebase.client.ValueEventListener;
 
 public class MainActivity extends AppCompatActivity {
     EditText todo_text;
@@ -41,7 +43,6 @@ public class MainActivity extends AppCompatActivity {
 
         // Assign adapter to ListView
         listView.setAdapter(adapter);
-
         // Use Firebase to populate the list.
         Firebase.setAndroidContext(this);
 
@@ -72,6 +73,26 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
+                new Firebase("https://mtodolist.firebaseio.com/todoItems")
+                        .orderByChild("text")
+                        .equalTo((String) listView.getItemAtPosition(i))
+                        .addListenerForSingleValueEvent(new ValueEventListener() {
+                            public void onDataChange(DataSnapshot dataSnapshot) {
+                                if (dataSnapshot.hasChildren()) {
+                                    DataSnapshot firstChild = dataSnapshot.getChildren().iterator().next();
+                                    firstChild.getRef().removeValue();
+                                }
+                            }
+
+                            public void onCancelled(FirebaseError firebaseError) {
+                            }
+                        });
+                return true;
+            }
+        });
     }
     private void addTask(){
         AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this)
